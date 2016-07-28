@@ -1,0 +1,41 @@
+{
+  "name": "qrz.cat",
+  "homepage": "https://github.com/ea3hsp/qrz.cat",
+  "description": "qrz.cat",
+  "main": "app.js",
+  "keywords": [
+    "arcat",
+    "socis",
+    "radio",
+    "radioaficionats",
+    "Catalunya"
+  ],
+  "authors": [
+    "ea3hsp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-route": "~1.4.3",
+    "angular-resource": "~1.4.3",
+    "bootstrap": "^3.3.6",
+    "jquery": "2.2.4",
+    "leaflet": "^0.7.7",
+    "socket.io-client": "^1.4.6",
+    "moment": "^2.13.0",
+    "bootstrap-toggle": "^2.2.2",
+    "font-awesome": "^4.6.3",
+    "bower": "*",
+    "install": "^1.0.4",
+    "angular-bootstrap": "^1.3.3",
+    "suncalc": "^1.7.0",
+    "angular-bootstrap-lightbox": "^0.12.0"
+  }
+}

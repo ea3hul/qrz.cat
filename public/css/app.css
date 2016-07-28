@@ -1,0 +1,48 @@
+.indicatiu_gros{
+	font-size:26pt;
+	color:#39f;
+	font-weight: bold;
+}
+
+.dh {
+  width: 20%;
+  color: #800;
+  font-size: 0.8em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+
+.gallery {
+  padding: 0;
+}
+
+.gallery li {
+  display: inline-block;
+  margin: 0 1em 1em 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .gallery li {
+    margin: 0;
+  }
+}
+
+.gallery1 img {
+ max-width:300px;
+ max-height:185px;
+}
+
+.gallery1:hover {
+    cursor: pointer;
+}
+
+.gallery2 img {
+  width: 6em;
+}
+
+.gallery5 img {
+  width: 120px;
+}

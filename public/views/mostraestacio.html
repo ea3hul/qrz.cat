@@ -1,0 +1,134 @@
+<div class="row">
+	<div class="col-md-8">
+		<div id="indicatiu" class="indicatiu_gros">{{callsign.call}} </b><img ng-src="/images/banderes/32/{{dxcc.cc}}.png" alt="bandera" /></div>
+		<div id="nom"><b>{{callsign.fname}} {{callsign.name}}</b></div>
+		<div id="adresa1" ng-show="callsign.addr1"><b>{{callsign.addr1}}</b></div>
+		<div id="adresa2" ng-show="callsign.addr2"><b>{{callsign.addr2}}</b></div>
+		<div id="pais" ng-show="callsign.land"><b>{{callsign.land}}</b></div>
+		<div id="manager" ng-show="callsign.qslmgr"><b>QSL:</b> {{callsign.qslmgr}}</div>
+		<div id="correu" ng-show="callsign.email"><b>Correu: </b><a href="mailto:{{callsign.email}}" target="_top"> {{callsign.email}}</a></div>
+		<div id="cerques"><b>Nombre de cerques:</b> {{callsign.u_views}}</div>
+	</div>
+	<div class="col-md-4">
+		<ul class="gallery gallery1">
+			<li ng-repeat="image in images">
+				<a ng-click="openLightboxModal($index)">
+					<img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
+				</a>
+			</li>
+		</ul>
+	</ul>
+</div>
+</div>
+<!--
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-default">Etiqueta</button>	
+	</div>
+</div>
+-->
+<hr>
+<div class="row">
+	<div class="col-md-12">
+		<uib-tabset active="activeJustified" justified="true">
+			<uib-tab index="0" heading="Biografia">
+				<hr>
+				<div ng-bind-html="htmlString"></div>
+			</uib-tab>
+			<uib-tab index="1" heading="Detall">
+				<hr>
+				<div class="col-md-8">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Detall estació</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table table-striped">
+								<tr>
+									<td class="dh">Cerques</td>
+									<td>{{callsign.u_views}}</td>
+								</tr>
+								<tr ng-show="callsign.class">
+									<td class="dh" >Llicència</td>
+									<td>{{callsign.class}}</td>
+								</tr>
+								<tr ng-show="callsign.lat">
+									<td class="dh">Latitud</td>
+									<td>{{callsign.lat}}</td>
+								</tr>
+								<tr ng-show="callsign.lon">
+									<td class="dh">Longitud</td>
+									<td>{{callsign.lon}}</td>
+								</tr>
+								<tr ng-show="dxcc.name">
+									<td class="dh">Entitat</td>
+									<td>{{dxcc.name}}</td>
+								</tr>
+								<tr ng-show="dxcc.continent">
+									<td class="dh">Continent</td>
+									<td>{{dxcc.continent}}</td>
+								</tr>
+								<tr ng-show="callsign.state">
+									<td class="dh">Estat EUA</td>
+									<td>{{callsign.state}}</td>
+								</tr>
+								<tr  ng-show="callsign.grid">
+									<td class="dh">Locator</td>
+									<td>{{callsign.grid}}</td>
+								</tr>
+								<tr ng-show="dxcc.ituzone">
+									<td class="dh">Zona ITU</td>
+									<td>{{dxcc.ituzone}}</td>
+								</tr>
+								<tr  ng-show="dxcc.cqzone">
+									<td class="dh">Zona CQ</td>
+									<td>{{dxcc.cqzone}}</td>
+								</tr>
+								<tr ng-show="dxcc.timezone">
+									<td class="dh">Dif. Horaria UTC</td>
+									<td>{{dxcc.timezone}}</td>
+								</tr>
+								<tr ng-show="astro.sunrise">
+									<td class="dh">Sortida del sol</td>
+									<td>{{astro.sunrise | date:'dd-MM-yyyy HH:mm:ss': 'UTC'}} UTC</td>
+								</tr>
+								<tr ng-show="astro.sunset">
+									<td class="dh">Posta del sol</td>
+									<td>{{astro.sunset | date:'dd-MM-yyyy HH:mm:ss': 'UTC'}} UTC</td>
+								</tr>
+								<tr ng-show="poblacio.comunitat">
+									<td class="dh">Comunitat</td>
+									<td>{{poblacio.comunitat}}</td>
+								</tr>
+								<tr ng-show="poblacio.provincia">
+									<td class="dh">Provincia</td>
+									<td>{{poblacio.provincia}}</td>
+								</tr>
+								<tr ng-show="poblacio.poblacio">
+									<td class="dh">Poblacio</td>
+									<td>{{poblacio.poblacio}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Localització</h3>
+						</div>
+						<div class="panel-body" ng-show="maptarget">
+							<worldmap maptarget="maptarget" style="display: block; width: 100%; height: 400px;"></worldmap>
+						</div>
+						<div class="panel-body" ng-hide="maptarget">
+							<button class="btn btn-default btn-sm" ng-click="mostrarMapa()">Mostrar</button>
+						</div>
+					</div>
+
+				</div>
+			</uib-tab>
+		</uib-tabset>
+	</div>
+</div>
