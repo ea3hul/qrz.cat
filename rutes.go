@@ -7,6 +7,19 @@ import (
 	"strconv"
 )
 
+func ApiActivitatSolar(c *gin.Context){
+
+	resp,_ := RestGetActivitatSolar()
+
+	/*b, err := json.Marshal(string(resp))
+
+	if err != nil {
+		fmt.Println("error:", err)
+	}*/
+
+	c.Data(200, "application/json", resp)
+}
+
 func ApiPoblacio(c *gin.Context) {
 	lat := c.Params.ByName("lat")
 	lon := c.Params.ByName("lon")

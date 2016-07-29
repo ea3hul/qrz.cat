@@ -102,6 +102,7 @@ func Start() {
 	api.GET("/qrz/:indicatiu/bio", ApiQrzIndicatiuBio)
 	api.GET("/dxcc/:entitat", ApiQrzEntitat)
 	api.GET("/geo/poblacio/:lat/:lon", ApiPoblacio)
+	api.GET("/solar/activitat", ApiActivitatSolar)
 
 	port := Port
 	if len(os.Getenv("PORT")) > 0 {

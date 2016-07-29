@@ -1,5 +1,49 @@
 package main
 
+type SActivitatSolar struct {
+	Solar struct {
+		Solardata struct {
+			Aindex string `json:"aindex,omitempty"`
+			Aurora string `json:"aurora,omitempty"`
+			Calculatedconditions struct {
+				Band []struct {
+					Text string `json:"#text,omitempty"`
+					Name string `json:"-name,omitempty"`
+					Time string `json:"-time,omitempty"`
+				} `json:"band,omitempty"`
+			} `json:"calculatedconditions,omitempty"`
+			Calculatedvhfconditions struct {
+				Phenomenon []struct {
+					Text string `json:"#text,omitempty"`
+					Location string `json:"-location,omitempty"`
+					Name string `json:"-name,omitempty"`
+				} `json:"phenomenon,omitempty"`
+			} `json:"calculatedvhfconditions,omitempty"`
+			Electonflux string `json:"electonflux,omitempty"`
+			Fof2 string `json:"fof2,omitempty"`
+			Geomagfield string `json:"geomagfield,omitempty"`
+			Heliumline string `json:"heliumline,omitempty"`
+			Kindex string `json:"kindex,omitempty"`
+			Kindexnt string `json:"kindexnt,omitempty"`
+			Latdegree string `json:"latdegree,omitempty"`
+			Magneticfield string `json:"magneticfield,omitempty"`
+			Muf string `json:"muf,omitempty"`
+			Muffactor string `json:"muffactor,omitempty"`
+			Normalization string `json:"normalization,omitempty"`
+			Protonflux string `json:"protonflux,omitempty"`
+			Signalnoise string `json:"signalnoise,omitempty"`
+			Solarflux string `json:"solarflux,omitempty"`
+			Solarwind string `json:"solarwind,omitempty"`
+			Source struct {
+				Text string `json:"#text,omitempty"`
+				URL string `json:"-url,omitempty"`
+			} `json:"source,omitempty"`
+			Sunspots string `json:"sunspots,omitempty"`
+			Updated string `json:"updated,omitempty"`
+			Xray string `json:"xray,omitempty"`
+		} `json:"solardata,omitempty"`
+	} `json:"solar,omitempty"`
+}
 type SQrzAuth struct {
 	Usuari      string `json:"username"`
 	Contrasenya string `json:"password"`

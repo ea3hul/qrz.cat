@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-8">
+		<h4>Propagació</h4>
+		<hr>
+		<small><em>Informació solar</em></small>
+		<table class="table table-striped">
+			<tr>
+				<td class="dh">Data Actualització</td>
+				<td>{{solar.solar.solardata.updated}}</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="dh">Flux solar</td>
+				<td>{{solar.solar.solardata.solarflux}}</td>
+				<td class="dh">Taques solars</td>
+				<td>{{solar.solar.solardata.sunspots}}</td>
+			</tr>
+			<tr>
+				<td class="dh">A</td>
+				<td>{{solar.solar.solardata.aindex}}</td>
+				<td class="dh">K</td>
+				<td>{{solar.solar.solardata.kindex}}</td>
+			</tr>
+			
+			<tr>
+				<td class="dh">Raigs X</td>
+				<td>{{solar.solar.solardata.xray}}</td>
+				<td class="dh">Radiacions He II 304-A</td>
+				<td>{{solar.solar.solardata.heliumline}}</td>
+			</tr>
+			<tr>
+				<td class="dh">Nivell soroll</td>
+				<td>{{solar.solar.solardata.signalnoise}}</td>
+				<td class="dh">Camp magnètic</td>
+				<td>{{solar.solar.solardata.magneticfield}}</td>
+			</tr>
+			<tr>
+				<td class="dh">Vent solar</td>
+				<td>{{solar.solar.solardata.solarwind}}</td>
+				<td class="dh">Camp geomagnètic</td>
+				<td>{{solar.solar.solardata.geomagfield}}</td>
+			</tr>
+
+			<tr>
+				<td class="dh">Aurora</td>
+				<td>{{solar.solar.solardata.aurora}}</td>
+				<td class="dh">Aurora lat graus</td>
+				<td>{{solar.solar.solardata.latdegree}}</td>
+			</tr>
+		</table>
+		<small><em>Previsions HF</em></small>
+
+		<table class="table table-striped">
+			<tr ng-repeat="banda in solar.solar.solardata.calculatedconditions">
+				<td>banda</td>
+				<td>{{banda[$index]}}</td>
+			</tr>
+		</table>
+
+		<pre>{{solar | json}}</pre>
+	</div>
+	<div class="col-md-4">
+	<img src="http://umbra.nascom.nasa.gov/images/latest_aia_193.gif" class="img-thumbnail">
+	</div>
+</div>
