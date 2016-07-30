@@ -52,6 +52,23 @@
 		<small><em>Previsions HF</em></small>
 
 		<table class="table table-striped">
+			<th>Banda</th>
+			<th>Dia</th>
+			<th>Nit</th>
+			<tr ng-repeat="banda in solar.solar.solardata.calculatedconditions">
+				<td>banda</td>
+				<td>{{banda[$index]}}</td>
+			</tr>
+		</table>
+
+		<small><em>Previsions VHF</em></small>
+
+		<table class="table table-striped">
+			<th>Hemisferi Nord</th>
+			<th>Nord America</th>
+			<th>Europa</th>
+			<th>Europa 6m</th>
+			<th>Europa 4m</th>
 			<tr ng-repeat="banda in solar.solar.solardata.calculatedconditions">
 				<td>banda</td>
 				<td>{{banda[$index]}}</td>
@@ -61,6 +78,17 @@
 		<pre>{{solar | json}}</pre>
 	</div>
 	<div class="col-md-4">
-	<img src="http://umbra.nascom.nasa.gov/images/latest_aia_193.gif" class="img-thumbnail">
+		<div class="row">
+			<div class="panel panel-boder panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">DARRERA IMATGE Fe XII 193 Å</h3>
+				</div>
+				<div class="panel-body">
+					<img src="http://umbra.nascom.nasa.gov/images/latest_aia_193.gif" class="img-thumbnail">
+				</div>
+			</div>
+
+		</div>
+		
 	</div>
 </div>

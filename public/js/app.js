@@ -22,6 +22,9 @@ App.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 		templateUrl: 'views/dashboard.html',
 		controller: 'DashBoardCtrl'
 	}).
+		when('/quant', {
+		templateUrl: 'views/quant.html'
+	}).
 	otherwise({
 		redirectTo: '/'
 	});
