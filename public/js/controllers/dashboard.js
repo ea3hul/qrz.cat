@@ -2,6 +2,7 @@ App.controller('DashBoardCtrl', function($scope,$http){
 
 	$scope.solar = {};
 
+
 	var getSolar = function(){
 
 		var url = "http://www.qrz.cat:8088/api/solar/activitat";
@@ -10,6 +11,7 @@ App.controller('DashBoardCtrl', function($scope,$http){
 		var groc = "#FDC702";
 		var taronja = "#FF7700";
 		var vermell = "#C50200";
+		var blau = "#0000FF";
 
 		$http.get(url)
 		.success(function(data){
@@ -73,43 +75,9 @@ App.controller('DashBoardCtrl', function($scope,$http){
 			$scope.aranges = [
 			{
 				min: 0,
-				max: 2.99,
-				color: verd
-			},
-			{
-				min: 3,
-				max: 4.99,
-				color: verd
-			},
-			{
-				min: 5,
-				max: 5.99,
-				color: '#FDC702'
-			},
-			{
-				min: 6,
-				max: 6.99,
-				color: '#FF7700'
-			},
-			{
-				min: 7,
-				max: 7.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 8,
-				max: 8.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 9,
-				max: 9,
-				color: '#C50200'
-			}
-
-			];
+				max: 400,
+				color: blau
+			}];
 
 			$scope.fluxvalue = $scope.solar.solarflux;
 
@@ -120,43 +88,20 @@ App.controller('DashBoardCtrl', function($scope,$http){
 
 			$scope.fluxranges = [
 			{
-				min: 0,
-				max: 2.99,
+				min: 62.5,
+				max: 79.99,
+				color: vermell
+			},
+			{
+				min: 80,
+				max: 104.99,
+				color: groc
+			},
+			{
+				min: 105,
+				max: 300,
 				color: verd
-			},
-			{
-				min: 3,
-				max: 4.99,
-				color: verd
-			},
-			{
-				min: 5,
-				max: 5.99,
-				color: '#FDC702'
-			},
-			{
-				min: 6,
-				max: 6.99,
-				color: '#FF7700'
-			},
-			{
-				min: 7,
-				max: 7.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 8,
-				max: 8.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 9,
-				max: 9,
-				color: '#C50200'
 			}
-
 			];
 
 			$scope.spotsvalue = $scope.solar.sunspots;
@@ -169,50 +114,13 @@ App.controller('DashBoardCtrl', function($scope,$http){
 			$scope.spotsranges = [
 			{
 				min: 0,
-				max: 2.99,
-				color: verd
-			},
-			{
-				min: 3,
-				max: 4.99,
-				color: verd
-			},
-			{
-				min: 5,
-				max: 5.99,
-				color: '#FDC702'
-			},
-			{
-				min: 6,
-				max: 6.99,
-				color: '#FF7700'
-			},
-			{
-				min: 7,
-				max: 7.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 8,
-				max: 8.99,
-				color: '#C50200'
-			},
-
-			{
-				min: 9,
-				max: 9,
-				color: '#C50200'
-			}
-
-			];
+				max: 250,
+				color: blau
+			}];
 
 
 		});
 	}
-
-	
-
 
 	getSolar();
 

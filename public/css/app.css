@@ -1520,3 +1520,11 @@
   .todo-send {
     padding-left: 0px;
   }
+
+.utc_time {
+    padding: 10px;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+   
+}
