@@ -59,6 +59,8 @@ gulp.task("vendor.js", function() {
     BOWER_DIR + "angular-bootstrap/ui-bootstrap-tpls.min.js",
     BOWER_DIR + "suncalc/suncalc.js",
     BOWER_DIR + "angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js",
+    BOWER_DIR + "d3/d3.js",
+    BOWER_DIR + "ngRadialGauge/src/ng-radial-gauge-dir.js",
     BOWER_DIR + "moment/moment.js",
     BOWER_DIR + "moment/locale/ca.js"
     ])

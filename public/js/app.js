@@ -3,7 +3,8 @@ var App = angular.module('App', [
 	"ngRoute", 
 	"ngResource",
 	"ui.bootstrap",
-	"bootstrapLightbox"
+	"bootstrapLightbox",
+	"ngRadialGauge"
 ]);
 
 /* Rutes */
@@ -24,6 +25,9 @@ App.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 	}).
 		when('/quant', {
 		templateUrl: 'views/quant.html'
+	}).
+	when('/repetidors', {
+		templateUrl: 'views/repetidors.html'
 	}).
 	otherwise({
 		redirectTo: '/'

@@ -6,76 +6,74 @@
 		<table class="table table-striped">
 			<tr>
 				<td class="dh">Data Actualització</td>
-				<td>{{solar.solar.solardata.updated}}</td>
+				<td>{{solardata.updated}}</td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td class="dh">Flux solar</td>
-				<td>{{solar.solar.solardata.solarflux}}</td>
+				<td>{{solardata.solarflux}}</td>
 				<td class="dh">Taques solars</td>
-				<td>{{solar.solar.solardata.sunspots}}</td>
+				<td>{{solardata.sunspots}}</td>
 			</tr>
 			<tr>
 				<td class="dh">A</td>
-				<td>{{solar.solar.solardata.aindex}}</td>
+				<td>{{solardata.aindex}}</td>
 				<td class="dh">K</td>
-				<td>{{solar.solar.solardata.kindex}}</td>
+				<td>{{solardata.kindex}}</td>
 			</tr>
 			
 			<tr>
 				<td class="dh">Raigs X</td>
-				<td>{{solar.solar.solardata.xray}}</td>
+				<td>{{solardata.xray}}</td>
 				<td class="dh">Radiacions He II 304-A</td>
-				<td>{{solar.solar.solardata.heliumline}}</td>
+				<td>{{solardata.heliumline}}</td>
 			</tr>
 			<tr>
 				<td class="dh">Nivell soroll</td>
-				<td>{{solar.solar.solardata.signalnoise}}</td>
+				<td>{{solardata.signalnoise}}</td>
 				<td class="dh">Camp magnètic</td>
-				<td>{{solar.solar.solardata.magneticfield}}</td>
+				<td>{{solardata.magneticfield}}</td>
 			</tr>
 			<tr>
 				<td class="dh">Vent solar</td>
-				<td>{{solar.solar.solardata.solarwind}}</td>
+				<td>{{solardata.solarwind}}</td>
 				<td class="dh">Camp geomagnètic</td>
-				<td>{{solar.solar.solardata.geomagfield}}</td>
+				<td>{{solardata.geomagfield}}</td>
 			</tr>
 
 			<tr>
 				<td class="dh">Aurora</td>
-				<td>{{solar.solar.solardata.aurora}}</td>
+				<td>{{solardata.aurora}}</td>
 				<td class="dh">Aurora lat graus</td>
-				<td>{{solar.solar.solardata.latdegree}}</td>
+				<td>{{solardata.latdegree}}</td>
 			</tr>
 		</table>
 		<small><em>Previsions HF</em></small>
 
 		<table class="table table-striped">
-			<th>Banda</th>
-			<th>Dia</th>
-			<th>Nit</th>
-			<tr ng-repeat="banda in solar.solar.solardata.calculatedconditions">
-				<td>banda</td>
-				<td>{{banda[$index]}}</td>
+			<th class="dh">Banda</th>
+			<th class="dh">Condicions</th>
+			<th class="dh">Franja horaria</th>
+			<tr ng-repeat="banda in solardata.calculatedconditions.band">
+				<td>{{banda["-name"]}}</td>
+				<td>{{banda["#text"]}}</td>
+				<td>{{banda["-time"]}}</td>
 			</tr>
 		</table>
 
 		<small><em>Previsions VHF</em></small>
 
 		<table class="table table-striped">
-			<th>Hemisferi Nord</th>
-			<th>Nord America</th>
-			<th>Europa</th>
-			<th>Europa 6m</th>
-			<th>Europa 4m</th>
-			<tr ng-repeat="banda in solar.solar.solardata.calculatedconditions">
-				<td>banda</td>
-				<td>{{banda[$index]}}</td>
+			<th class="dh">Condicions</th>
+			<th class="dh">Lloc / localització</th>
+			<th class="dh">Fenomen</th>
+			<tr ng-repeat="banda in solardata.calculatedvhfconditions.phenomenon">
+				<td>{{banda["#text"]}}</td>
+				<td>{{banda["-location"]}}</td>
+				<td>{{banda["-name"]}}</td>
 			</tr>
 		</table>
-
-		<pre>{{solar | json}}</pre>
 	</div>
 	<div class="col-md-4">
 		<div class="row">
