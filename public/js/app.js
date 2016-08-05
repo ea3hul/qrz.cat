@@ -4,13 +4,51 @@ var App = angular.module('App', [
 	"ngResource",
 	"ui.bootstrap",
 	"bootstrapLightbox",
+	"ngWebSocket",
 	"ngRadialGauge"
-]);
+]).constant("REST_API", {
+        "HostName": "http://localhost",
+        "WsHostname": "ws://localhost",
+        "Port": 8088
+})
+
+App.filter('condicions', function () {
+  return function (condicio) {
+  	var res = condicio;
+	switch(condicio){
+		case "Poor":
+			res = "Dolentes";
+			break;
+		case "Good":
+			res = "Bones";
+			break;
+		case "Fair":
+			res = "Amb posibilitats";
+			break;
+		case "day":
+			res = "Durant el dia";
+			break;
+		case "night":
+			res = "Durant la nit";
+			break;
+		case "Band Closed":
+			res = "Banda tancada";
+			break;
+		default:
+		break;
+	}
+    return res;
+  };
+});
 
 /* Rutes */
 App.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
 
 	$routeProvider.
+	when('/db/:indicatiu/:sufix', {
+		templateUrl: 'views/mostraestacio.html',
+		controller: 'MostraEstacioCtrl'
+	}).
 	when('/db/:indicatiu', {
 		templateUrl: 'views/mostraestacio.html',
 		controller: 'MostraEstacioCtrl'
@@ -29,8 +67,13 @@ App.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 	when('/repetidors', {
 		templateUrl: 'views/repetidors.html'
 	}).
+	when('/aprs', {
+		templateUrl: 'views/aprs.html',
+		controller: 'AprsCtrl'
+	}).
 	otherwise({
 		redirectTo: '/'
 	});
 }]);
+
 

@@ -1,8 +1,14 @@
-App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$sce,Lightbox){
+App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$sce,Lightbox,REST_API){
 
 	var mapTargets = [null, null, null];
 
 	var indicatiu = $routeParams.indicatiu;
+
+	$scope.alerts = [];
+
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 	$scope.images = [];
 
@@ -12,9 +18,12 @@ App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$
 	$scope.astro = {};
 	$scope.poblacio = {};
 
-	var url = "http://www.qrz.cat:8088/api/qrz/";
-	var urlent = "http://www.qrz.cat:8088/api/dxcc/";
-	var urlpb = "http://www.qrz.cat:8088/api/geo/poblacio/"
+	var urlbase = REST_API.HostName + ":" + REST_API.Port;
+
+	var url = urlbase + "/api/qrz/";
+	var urlent = urlbase + "/api/dxcc/";
+	var urlpb = urlbase + "/api/geo/poblacio/";
+
 
 	$http({
 		method: "GET",
@@ -23,7 +32,7 @@ App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$
 
 		var htmldata = response.data.split("Â").join("").split("Ã³").join("ó").split("Ã").join("í")
 		.split("í±").join("ñ").split("í¡").join("á").split("í©").join("é").split("í ").join("à")
-		.split("í¨").join("è");
+		.split("í¨").join("è").split("â€“").join("-").split("í“").join("Ó");
 
 		$scope.htmlString = $sce.trustAsHtml(htmldata);
 		
@@ -54,7 +63,7 @@ App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$
 						'caption': $scope.callsign.call
 					}];
 
-					if ($scope.dxcc.name == "Spain"){
+					if ($scope.dxcc.name == "Spain" || $scope.dxcc.name == "Balearic Islands"  || $scope.dxcc.name == "Ceuta and Melilla"  || $scope.dxcc.name == "Canary Islands"){
 
 						$http({
 							method:"GET",
@@ -62,7 +71,6 @@ App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$
 						}).then(function successCallback(response) {
 
 							$scope.poblacio = response.data;
-
 							
 							switch ($scope.poblacio.comunitat){
 								case "Catalunya":
@@ -110,40 +118,43 @@ App.controller('MostraEstacioCtrl', function($scope,$routeParams,$http,$window,$
 								case "Extremadura":
 								$scope.dxcc.cc = "_EX";
 								break;	
-
+								case "Canarias":
+								$scope.dxcc.cc = "_CN";
+								break;
+								case "Ceuta y Melilla":
+								$scope.dxcc.cc = "_CE";
+								break;
+								case "Islas Baleares":
+								$scope.dxcc.cc = "IB";
 								default:
 								break;
 
 							}
+							if ($scope.callsign.call.indexOf("3") !== -1){
+								$scope.dxcc.cc = "CT";
+							}
 
+							if ($scope.callsign.call.indexOf("7") !== -1){
+								$scope.dxcc.cc = "_AN";
+							}
 						}, function errorCallback (response){
 							console.log(response);
 						});
 					}
 
-					if ($scope.dxcc.name == "Balearic Islands"){
-						$scope.dxcc.cc = "_IB";
-					}
-
-					if ($scope.dxcc.name == "Ceuta and Melilla"){
-						$scope.dxcc.cc = "_CL";
-					}
-
-					if ($scope.dxcc.name == "Canary Islands"){
-						$scope.dxcc.cc = "_CN";
-					}
+					
 
 					$scope.astro = SunCalc.getTimes(Date.now(), $scope.callsign.lat, $scope.callsign.lon);
 
 				}else{
-					$window.alert($scope.session.Error);
+					$scope.alerts.push({ type: "danger", msg: $scope.session.Error});
 				}
 
 			}, function errorCallback(response) {
 				console.log(response);
 			});
 		}else{
-			$window.alert($scope.session.Error);
+			$scope.alerts.push({ type: "danger", msg: $scope.session.Error});
 		}
 		
 	}, function errorCallback(response) {

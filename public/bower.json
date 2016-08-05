@@ -38,6 +38,7 @@
     "suncalc": "^1.7.0",
     "angular-bootstrap-lightbox": "^0.12.0",
     "angular-chart.js": "^1.0.0",
-    "ngRadialGauge": "*"
+    "ngRadialGauge": "*",
+    "angular-websocket": "^2.0.0"
   }
 }

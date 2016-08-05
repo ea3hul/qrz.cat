@@ -8,6 +8,9 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
+	"github.com/olahol/melody"
+	"net/http"
+    
 )
 
 var (
@@ -15,6 +18,7 @@ var (
 	qrl   SQrzRespostaLogin
 	token string
 	pb    SPoblacions
+	caducitat time.Time
 )
 
 const (
@@ -27,6 +31,8 @@ func main() {
 
 // Obté el token del QRZ
 func Auth() {
+
+	var err error
 
 	// Carrega del fitxer auth per qrz.com
 	file, err := ioutil.ReadFile("qrzauth.json")
@@ -48,7 +54,7 @@ func Auth() {
 	json.Unmarshal(res, &qrl)
 
 	token = qrl.QRZDatabase.Session.Key
-
+	
 	fmt.Println("Token actual >", token)
 
 }
@@ -81,6 +87,10 @@ func Start() {
 	Poblacions()
 
 	router := gin.Default()
+	m := melody.New()
+	m.Upgrader.CheckOrigin = func(r *http.Request) bool { return true }
+
+	fmt.Println(m)
 
 	router.Use(cors.Middleware(cors.Config{
 		Origins:         "*",
@@ -94,6 +104,14 @@ func Start() {
 
 	router.Static("/public", "./public")
 	router.StaticFile("/favicon.ico", "./public/images/favicon.png")
+	
+	router.GET("/ws",func(c *gin.Context) {
+  		m.HandleRequest(c.Writer, c.Request)
+  	})
+  	
+  	m.HandleMessage(func(s *melody.Session, msg []byte) {
+  		m.Broadcast(msg)
+  	})
 
 	api := router.Group("/api")
 

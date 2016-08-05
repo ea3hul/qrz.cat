@@ -54,6 +54,7 @@ gulp.task("vendor.js", function() {
     BOWER_DIR + "angular/angular.min.js",
     BOWER_DIR + "angular-route/angular-route.min.js",
     BOWER_DIR + "angular-resource/angular-resource.min.js",
+    BOWER_DIR + "angular-websocket/dist/angular-websocket.min.js",
     BOWER_DIR + "leaflet/dist/leaflet.js",
     BOWER_DIR + "socket.io-client/socket.io.js",
     BOWER_DIR + "angular-bootstrap/ui-bootstrap-tpls.min.js",

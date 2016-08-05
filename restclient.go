@@ -8,15 +8,6 @@ import (
 )
 
 
-func toUtf8(iso8859_1_buf []byte) []byte {
-    buf := make([]rune, len(iso8859_1_buf))
-    for i, b := range iso8859_1_buf {
-        buf[i] = rune(b)
-    }
-    return (buf)
-}
-
-
 func RestGetPoblacio(φ1, λ1 float64) SPoblacio {
 	return GetPoblacio(φ1, λ1)
 }
@@ -77,9 +68,7 @@ func RestGetQrzIndicatiuBio(indicatiu string) ([]byte, error) {
 	} else {
 		defer response.Body.Close()
 
-		if b, err := ioutil.ReadAll(response.Body); err == nil {
-
-			bio := toUtf8(b)
+		if bio, err := ioutil.ReadAll(response.Body); err == nil {
 
 			return bio, err
 		}

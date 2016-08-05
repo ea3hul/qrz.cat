@@ -1,11 +1,12 @@
-App.controller('DashBoardCtrl', function($scope,$http){
+App.controller('DashBoardCtrl', function($scope,$http,REST_API){
 
 	$scope.solar = {};
 
 
 	var getSolar = function(){
-
-		var url = "http://www.qrz.cat:8088/api/solar/activitat";
+		
+		var urlbase = REST_API.HostName + ":" + REST_API.Port;
+		var url = urlbase + "/api/solar/activitat";
 
 		var verd = "#8DCA2F";
 		var groc = "#FDC702";
