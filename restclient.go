@@ -59,6 +59,13 @@ func RestGetQrzEntitat(entitat string) ([]byte, error) {
 	return nil, err
 }
 
+func RestGetQrzEntitats() ([]byte, error) {
+
+	entitats,err := Entitats()
+
+	return entitats,err
+}
+
 func RestGetQrzIndicatiuBio(indicatiu string) ([]byte, error) {
 
 	url := "http://xmldata.qrz.com/xml/current/?s=" + token + ";html=" + indicatiu

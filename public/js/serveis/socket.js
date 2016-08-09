@@ -4,14 +4,14 @@ App.factory('wsData', function($websocket,REST_API) {
   
   var dataStream = $websocket(urlbase);
 
-  var collection = [];
+  var msg = "";
 
   dataStream.onMessage(function(message) {
-        collection.push(message.data);
+    msg = message;
   });
 
   var methods = {
-    collection: collection,
+    msg: msg,
     send: function(msg) {
       dataStream.send(msg);
     }

@@ -70,6 +70,21 @@ func ApiQrzEntitat(c *gin.Context) {
 
 }
 
+func ApiQrzEntitats(c *gin.Context) {
+
+	entitats,err := RestGetQrzEntitats()
+
+	if err == nil {
+		c.Data(200, "application/json", entitats)
+	} else {
+		c.JSON(404, gin.H{
+			"error": err,
+		})
+	}
+
+}
+
+
 func ApiQrzIndicatiuBio(c *gin.Context) {
 
 	indicatiu := c.Params.ByName("indicatiu")

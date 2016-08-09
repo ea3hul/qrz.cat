@@ -19,6 +19,7 @@ var (
 	token string
 	pb    SPoblacions
 	caducitat time.Time
+	ent SQrzEntitat
 )
 
 const (
@@ -59,8 +60,19 @@ func Auth() {
 
 }
 
-func Entitats() {
+func Entitats() ([]byte,error) {
 
+	// Carrega del fitxer de les poblacions
+	file, err := ioutil.ReadFile("./lib/entitats.json")
+
+	if err != nil {
+		fmt.Println(err)
+		return nil,err
+	}
+
+	json.Unmarshal(file, &ent)
+
+	return file,err
 }
 
 func Poblacions() {
@@ -77,6 +89,7 @@ func Poblacions() {
 
 }
 
+
 // Funció principal
 func Start() {
 
@@ -85,6 +98,9 @@ func Start() {
 
 	// Carrega poblacions
 	Poblacions()
+
+	// Carrega entitats
+	Entitats()
 
 	router := gin.Default()
 	m := melody.New()
@@ -119,6 +135,7 @@ func Start() {
 	api.GET("/qrz/:indicatiu", ApiQrzIndicatiu)
 	api.GET("/qrz/:indicatiu/bio", ApiQrzIndicatiuBio)
 	api.GET("/dxcc/:entitat", ApiQrzEntitat)
+	api.GET("/dxcc", ApiQrzEntitats)
 	api.GET("/geo/poblacio/:lat/:lon", ApiPoblacio)
 	api.GET("/solar/activitat", ApiActivitatSolar)
 

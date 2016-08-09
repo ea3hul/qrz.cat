@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h4>Atles Entitats DX</h4>
+		<hr>
+		<div class="form-group">
+			<label for="sel1">Entitat</label>
+			<select class="form-control" ng-model="dxcc.id" ng-options="entitat.dxcc as entitat.name for entitat in entitats">
+			</select>
+		</div>
+		<pre ng-show="entitat.name"><span class="indicatiu_gros"><img ng-src="/images/banderes/64/{{entitat.cc}}.png" alt="bandera" ng-show="entitat.cc" /> {{entitat.name}}</span></pre>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel panel-default" ng-show="entitat.name">
+					<div class="panel-heading"><h3 class="panel-title">Detall</h3>
+						<div class="panel-body" >
+							<table class="table table-striped" ng-show="entitat.name">
+								<tr>
+									<td class="dh">Entitat DX</td><td>{{entitat.name}}</td>
+									<td class="dh">Num.Entitat</td><td>{{entitat.dxcc}}</td>
+								</tr>
+								<tr>
+									<td class="dh">Fus horari</td><td> {{entitat.timezone}} UTC</td>
+									<td class="dh">Codi C</td><td> {{entitat.cc}} </td>
+								</tr>
+								<tr>
+									<td class="dh">Zona CQ</td><td>{{entitat.cqzone}}</td>
+									<td class="dh">Zona ITU</td><td>{{entitat.ituzone}}</td>
+								</tr>
+								<tr>
+									<td class="dh">Continent</td><td> {{entitat.continent}} </td>
+									<td> <a href="https://en.wikipedia.org/wiki/{{entitat.name}}" target="_blank" class="btn btn-default btn-sm">+Info</a></td><td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-default" ng-show="entitat.lat">
+					<div class="panel-heading">
+						<h3 class="panel-title">Localització Lat: {{entitat.lat}} Lon: {{entitat.lon}}</h3>
+					</div>
+					<div class="panel-body" >
+						<worldmap maptarget="maptarget" style="display: block; width: 100%; height: 350px;"></worldmap>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

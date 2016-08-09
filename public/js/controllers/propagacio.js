@@ -1,10 +1,12 @@
-App.controller('PropagacioCtrl', function($scope,$http){
+App.controller('PropagacioCtrl', function($scope,$http,REST_API){
 
 	$scope.solardata = {};
 	
 	var getSolar = function(){
 
-		var url = "http://www.qrz.cat:8088/api/solar/activitat";
+		var urlbase = REST_API.HostName + ":" + REST_API.Port;
+
+		var url = urlbase + "/api/solar/activitat";
 
 		$http.get(url)
 		.success(function(data){

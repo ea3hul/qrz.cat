@@ -71,6 +71,10 @@ App.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 		templateUrl: 'views/aprs.html',
 		controller: 'AprsCtrl'
 	}).
+	when('/entitats',{
+		templateUrl: "views/entitats.html",
+		controller: "EntitatsCtrl"
+	}).
 	otherwise({
 		redirectTo: '/'
 	});
