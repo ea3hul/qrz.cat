@@ -4,14 +4,15 @@
 		<hr>
 		<div class="form-group">
 			<label for="sel1">Entitat</label>
-			<select class="form-control" ng-model="dxcc.id" ng-options="entitat.dxcc as entitat.name for entitat in entitats">
+			<select class="form-control" 
+			 ng-model="dxcc.id" ng-options="entitat.dxcc as entitat.name for entitat in entitats | orderBy:'name'">
 			</select>
 		</div>
 		<pre ng-show="entitat.name"><span class="indicatiu_gros"><img ng-src="/images/banderes/64/{{entitat.cc}}.png" alt="bandera" ng-show="entitat.cc" /> {{entitat.name}}</span></pre>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel panel-default" ng-show="entitat.name">
-					<div class="panel-heading"><h3 class="panel-title">Detall</h3>
+					<div class="panel-heading"><h3 class="panel-title dh">Detall</h3>
 						<div class="panel-body" >
 							<table class="table table-striped" ng-show="entitat.name">
 								<tr>

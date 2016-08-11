@@ -3,7 +3,10 @@ App.controller('EntitatsCtrl', function($scope,$http,REST_API){
 	$scope.entitat = {};
 	$scope.entitats = [];
 	var mapTargets = [null, null, null];
-	
+	$scope.dxcc = {
+		id: "3"
+	}
+
 	var getEntitats = function(){
 
 		var urlbase = REST_API.HostName + ":" + REST_API.Port;
@@ -14,12 +17,15 @@ App.controller('EntitatsCtrl', function($scope,$http,REST_API){
 		.success(function(data){
 			
 			$scope.entitats = (data.QRZDatabase.DXCC);
+			$scope.entitat = $scope.entitats[3];
+
 		});
 	}
 
 	getEntitats();
 
 	entitatChanged = function (id) {
+		
 		angular.forEach($scope.entitats, function(entitat, key) {
 			angular.forEach(entitat, function (valor, clau) {
 
