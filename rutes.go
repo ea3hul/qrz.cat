@@ -2,26 +2,34 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
+	"fmt"
 )
 
-func ApiActivitatSolar(c *gin.Context){
+type Rutes struct {
+	rest *RestClient
+}
 
-	resp,_ := RestGetActivitatSolar()
+func (r *Rutes) Init (){
+	r.rest = new(RestClient)
+}
+
+func (r *Rutes) ApiActivitatSolar(c *gin.Context){
+
+	resp,_ := r.rest.RestGetActivitatSolar()
 
 	c.Data(200, "application/json", resp)
 }
 
-func ApiPoblacio(c *gin.Context) {
+func (r *Rutes) ApiPoblacio(c *gin.Context) {
 	lat := c.Params.ByName("lat")
 	lon := c.Params.ByName("lon")
 
 	flat, _ := strconv.ParseFloat(lat, 64)
 	flon, _ := strconv.ParseFloat(lon, 64)
 
-	resp := GetPoblacio(flat, flon)
+	resp := r.rest.RestGetPoblacio(flat, flon)
 
 	b, err := json.Marshal(resp)
 
@@ -31,18 +39,14 @@ func ApiPoblacio(c *gin.Context) {
 
 	c.Data(200, "application/json", b)
 
-	/*} else {
-		c.JSON(404, gin.H{"comunitat": "no s'ha trobat"})
-	}*/
-
 }
 
 // Retorna el token de validacio
-func ApiQrzIndicatiu(c *gin.Context) {
+func (r *Rutes) ApiQrzIndicatiu(c *gin.Context) {
 
 	indicatiu := c.Params.ByName("indicatiu")
 
-	resp, err := RestGetQrzIndicatiu(indicatiu)
+	resp, err := r.rest.RestGetQrzIndicatiu(indicatiu)
 
 	if err == nil {
 		c.Data(200, "application/json", resp)
@@ -54,11 +58,11 @@ func ApiQrzIndicatiu(c *gin.Context) {
 
 }
 
-func ApiQrzEntitat(c *gin.Context) {
+func (r *Rutes) ApiQrzEntitat(c *gin.Context) {
 
 	entitat := c.Params.ByName("entitat")
 
-	resp, err := RestGetQrzEntitat(entitat)
+	resp, err := r.rest.RestGetQrzEntitat(entitat)
 
 	if err == nil {
 		c.Data(200, "application/json", resp)
@@ -70,9 +74,9 @@ func ApiQrzEntitat(c *gin.Context) {
 
 }
 
-func ApiQrzEntitats(c *gin.Context) {
+func (r *Rutes) ApiQrzEntitats(c *gin.Context) {
 
-	entitats,err := RestGetQrzEntitats()
+	entitats,err := r.rest.RestGetQrzEntitats()
 
 	if err == nil {
 		c.Data(200, "application/json", entitats)
@@ -85,11 +89,11 @@ func ApiQrzEntitats(c *gin.Context) {
 }
 
 
-func ApiQrzIndicatiuBio(c *gin.Context) {
+func (r *Rutes) ApiQrzIndicatiuBio(c *gin.Context) {
 
 	indicatiu := c.Params.ByName("indicatiu")
 
-	resp, err := RestGetQrzIndicatiuBio(indicatiu)
+	resp, err := r.rest.RestGetQrzIndicatiuBio(indicatiu)
 
 	if err == nil {
 		c.Data(200, "text/html", resp)

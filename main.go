@@ -45,7 +45,9 @@ func Auth() {
 
 	json.Unmarshal(file, &qau)
 
-	res, err := RestGetQrzToken(qau.Usuari, qau.Contrasenya)
+	restclient := new (RestClient)
+
+	res, err := restclient.RestGetQrzToken(qau.Usuari, qau.Contrasenya)
 
 	if err != nil {
 		fmt.Println(err)
@@ -102,6 +104,10 @@ func Start() {
 	// Carrega entitats
 	Entitats()
 
+	// Rutes
+	rutes := new(Rutes)
+	rutes.Init()
+
 	router := gin.Default()
 	m := melody.New()
 	m.Upgrader.CheckOrigin = func(r *http.Request) bool { return true }
@@ -132,12 +138,12 @@ func Start() {
 	api := router.Group("/api")
 
 	// Consultes a la api
-	api.GET("/qrz/:indicatiu", ApiQrzIndicatiu)
-	api.GET("/qrz/:indicatiu/bio", ApiQrzIndicatiuBio)
-	api.GET("/dxcc/:entitat", ApiQrzEntitat)
-	api.GET("/dxcc", ApiQrzEntitats)
-	api.GET("/geo/poblacio/:lat/:lon", ApiPoblacio)
-	api.GET("/solar/activitat", ApiActivitatSolar)
+	api.GET("/qrz/:indicatiu", rutes.ApiQrzIndicatiu)
+	api.GET("/qrz/:indicatiu/bio", rutes.ApiQrzIndicatiuBio)
+	api.GET("/dxcc/:entitat", rutes.ApiQrzEntitat)
+	api.GET("/dxcc", rutes.ApiQrzEntitats)
+	api.GET("/geo/poblacio/:lat/:lon", rutes.ApiPoblacio)
+	api.GET("/solar/activitat", rutes.ApiActivitatSolar)
 
 	port := Port
 	if len(os.Getenv("PORT")) > 0 {

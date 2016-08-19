@@ -5,14 +5,17 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"encoding/json"
 )
 
+type RestClient struct {}
 
-func RestGetPoblacio(φ1, λ1 float64) SPoblacio {
+
+func (rest *RestClient) RestGetPoblacio(φ1, λ1 float64) SPoblacio {
 	return GetPoblacio(φ1, λ1)
 }
 
-func RestGetActivitatSolar() ([]byte,error){
+func (rest *RestClient) RestGetActivitatSolar() ([]byte,error){
 	url := "http://www.hamqsl.com/solarxml.php"
 	response, err := http.Get(url)
 	if err != nil {
@@ -35,7 +38,7 @@ func RestGetActivitatSolar() ([]byte,error){
 	return nil, err
 }
 
-func RestGetQrzEntitat(entitat string) ([]byte, error) {
+func (rest *RestClient) RestGetQrzEntitat(entitat string) ([]byte, error) {
 
 	url := "http://xmldata.qrz.com/xml/current/?s=" + token + ";dxcc=" + entitat
 	response, err := http.Get(url)
@@ -59,14 +62,14 @@ func RestGetQrzEntitat(entitat string) ([]byte, error) {
 	return nil, err
 }
 
-func RestGetQrzEntitats() ([]byte, error) {
+func (rest *RestClient) RestGetQrzEntitats() ([]byte, error) {
 
 	entitats,err := Entitats()
 
 	return entitats,err
 }
 
-func RestGetQrzIndicatiuBio(indicatiu string) ([]byte, error) {
+func (rest *RestClient) RestGetQrzIndicatiuBio(indicatiu string) ([]byte, error) {
 
 	url := "http://xmldata.qrz.com/xml/current/?s=" + token + ";html=" + indicatiu
 	response, err := http.Get(url)
@@ -89,7 +92,7 @@ func RestGetQrzIndicatiuBio(indicatiu string) ([]byte, error) {
 
 }
 
-func RestGetQrzIndicatiu(indicatiu string) ([]byte, error) {
+func (rest *RestClient) RestGetQrzIndicatiu(indicatiu string) ([]byte, error) {
 
 	url := "http://xmldata.qrz.com/xml/current/?s=" + token + ";callsign=" + indicatiu
 	response, err := http.Get(url)
@@ -100,7 +103,13 @@ func RestGetQrzIndicatiu(indicatiu string) ([]byte, error) {
 
 		if b, err := ioutil.ReadAll(response.Body); err == nil {
 
+			var la SQrzRespostaIndicatiu
+
 			data, err := XmlToJson(b)
+
+			json.Unmarshal(data,&la)
+
+			//rest.database.InsQrz(la.QRZDatabase.Callsign)
 
 			return data, err
 		}
@@ -122,7 +131,7 @@ func XmlToJson(xmlVal []byte, safeEncoding ...bool) ([]byte, error) {
 	return m.Json(safeEncoding...)
 }
 
-func RestGetQrzToken(usuari string, contrasenya string) ([]byte, error) {
+func (rest *RestClient) RestGetQrzToken(usuari string, contrasenya string) ([]byte, error) {
 
 	url := "http://xmldata.qrz.com/xml/current/?username=" + usuari + ";password=" + contrasenya
 	response, err := http.Get(url)

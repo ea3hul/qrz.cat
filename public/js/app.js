@@ -7,8 +7,8 @@ var App = angular.module('App', [
 	"ngWebSocket",
 	"ngRadialGauge"
 ]).constant("REST_API", {
-        "HostName": "http://www.qrz.cat",
-        "WsHostname": "ws://www.qrz.cat",
+        "HostName": "http://localhost",
+        "WsHostname": "ws://localhost",
         "Port": 8088
 })
 
